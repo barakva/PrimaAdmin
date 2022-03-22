@@ -437,6 +437,15 @@
     <Content Include="Pages\components-pagination.html" />
     <Content Include="Pages\components-tabs.html" />
     <Content Include="Pages\index.html" />
+    <Content Include="Pages\pages-Customers.html" />
+    <Content Include="Pages\pages-Projects.html" />
+    <Content Include="Pages\pages-SubProjects.html" />
+    <Content Include="Pages\pages-Orders.html" />
+    <Content Include="Pages\pages-Shipments.html" />
+    <Content Include="Pages\pages-WorkPlansWeekly.html" />
+    <Content Include="Pages\pages-WorkPlansDaily.html" />
+    <Content Include="Pages\pages-Resources.html" />
+    <Content Include="Pages\pages-QA.html" />
     <Content Include="Pages\pages-blank.html" />
     <Content Include="Pages\pages-login.html" />
     <Content Include="Pages\tables-data.html" />
