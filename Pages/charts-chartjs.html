@@ -15,7 +15,9 @@
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    rel="stylesheet">
 
   <!-- Vendor CSS Files -->
   <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -518,94 +520,35 @@
       </nav>
     </div><!-- End Page Title -->
 
-    <p>Chart.JS Examples. You can check the <a href="https://www.chartjs.org/docs/latest/samples/" target="_blank">official website</a> for more examples.</p>
+    <p>Chart.JS Examples. You can check the <a href="https://www.chartjs.org/docs/latest/samples/"
+        target="_blank">official website</a> for more examples.</p>
 
     <section class="section">
       <div class="row">
 
-        <div class="col-lg-6">
+        <div class="col-lg-4">
           <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Line Chart</h5>
+            <div id="lineChartBody" class="card-body">
+              <h5 class="card-title">כמות הזמנות לפי תאריכי סיום</h5>
 
               <!-- Line Chart -->
               <canvas id="lineChart" style="max-height: 400px;"></canvas>
-              <script>
-                document.addEventListener("DOMContentLoaded", () => {
-                  new Chart(document.querySelector('#lineChart'), {
-                    type: 'line',
-                    data: {
-                      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-                      datasets: [{
-                        label: 'Line Chart',
-                        data: [65, 59, 80, 81, 56, 55, 40],
-                        fill: false,
-                        borderColor: 'rgb(75, 192, 192)',
-                        tension: 0.1
-                      }]
-                    },
-                    options: {
-                      scales: {
-                        y: {
-                          beginAtZero: true
-                        }
-                      }
-                    }
-                  });
-                });
-              </script>
+
               <!-- End Line CHart -->
 
             </div>
           </div>
         </div>
 
-        <div class="col-lg-6">
+        <div class="col-lg-4">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Bar CHart</h5>
+              <h5 class="card-title">כמות הזמנות לפי תאריכי סיום</h5>
 
               <!-- Bar Chart -->
               <canvas id="barChart" style="max-height: 400px;"></canvas>
               <script>
-                document.addEventListener("DOMContentLoaded", () => {
-                  new Chart(document.querySelector('#barChart'), {
-                    type: 'bar',
-                    data: {
-                      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-                      datasets: [{
-                        label: 'Bar Chart',
-                        data: [65, 59, 80, 81, 56, 55, 40],
-                        backgroundColor: [
-                          'rgba(255, 99, 132, 0.2)',
-                          'rgba(255, 159, 64, 0.2)',
-                          'rgba(255, 205, 86, 0.2)',
-                          'rgba(75, 192, 192, 0.2)',
-                          'rgba(54, 162, 235, 0.2)',
-                          'rgba(153, 102, 255, 0.2)',
-                          'rgba(201, 203, 207, 0.2)'
-                        ],
-                        borderColor: [
-                          'rgb(255, 99, 132)',
-                          'rgb(255, 159, 64)',
-                          'rgb(255, 205, 86)',
-                          'rgb(75, 192, 192)',
-                          'rgb(54, 162, 235)',
-                          'rgb(153, 102, 255)',
-                          'rgb(201, 203, 207)'
-                        ],
-                        borderWidth: 1
-                      }]
-                    },
-                    options: {
-                      scales: {
-                        y: {
-                          beginAtZero: true
-                        }
-                      }
-                    }
-                  });
-                });
+
               </script>
               <!-- End Bar CHart -->
 
@@ -613,37 +556,14 @@
           </div>
         </div>
 
-        <div class="col-lg-6">
+        <div class="col-lg-4">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Pie Chart</h5>
+              <h5 class="card-title">כמות פרויקטים לפי חברה</h5>
 
               <!-- Pie Chart -->
-              <canvas id="pieChart" style="max-height: 400px;"></canvas>
-              <script>
-                document.addEventListener("DOMContentLoaded", () => {
-                  new Chart(document.querySelector('#pieChart'), {
-                    type: 'pie',
-                    data: {
-                      labels: [
-                        'Red',
-                        'Blue',
-                        'Yellow'
-                      ],
-                      datasets: [{
-                        label: 'My First Dataset',
-                        data: [300, 50, 100],
-                        backgroundColor: [
-                          'rgb(255, 99, 132)',
-                          'rgb(54, 162, 235)',
-                          'rgb(255, 205, 86)'
-                        ],
-                        hoverOffset: 4
-                      }]
-                    }
-                  });
-                });
-              </script>
+              <canvas id="pieChart" style="max-height: 270px;"></canvas>
+              
               <!-- End Pie CHart -->
 
             </div>
@@ -745,13 +665,13 @@
             </div>
           </div>
         </div>
-
+<!-- 
         <div class="col-lg-6">
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">Polar Area Chart</h5>
 
-              <!-- Polar Area Chart -->
+          
               <canvas id="polarAreaChart" style="max-height: 400px;"></canvas>
               <script>
                 document.addEventListener("DOMContentLoaded", () => {
@@ -780,18 +700,18 @@
                   });
                 });
               </script>
-              <!-- End Polar Area Chart -->
+             
 
             </div>
           </div>
-        </div>
+        </div> -->
 
-        <div class="col-lg-6">
+        <!-- <div class="col-lg-6">
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">Stacked Bar Chart</h5>
 
-              <!-- Stacked Bar Chart -->
+              
               <canvas id="stakedBarChart" style="max-height: 400px;"></canvas>
               <script>
                 document.addEventListener("DOMContentLoaded", () => {
@@ -836,18 +756,18 @@
                   });
                 });
               </script>
-              <!-- End Stacked Bar Chart -->
+             
 
             </div>
           </div>
-        </div>
+        </div> -->
 
-        <div class="col-lg-6">
+        <!-- <div class="col-lg-6">
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">Bubble Chart</h5>
 
-              <!-- Bubble Chart -->
+              
               <canvas id="bubbleChart" style="max-height: 400px;"></canvas>
               <script>
                 document.addEventListener("DOMContentLoaded", () => {
@@ -924,15 +844,18 @@
                   });
                 });
               </script>
-              <!-- End Bubble Chart -->
+              
 
             </div>
           </div>
-        </div>
+        </div> -->
 
       </div>
     </section>
-
+    <div style="display: none;">
+      <script src="https://wabrv2opx4.cloudtables.io/loader/443b781a-a172-11ec-8f1a-9b776e234b62/table/bs5"
+        data-apiKey="uVp2dpI8ORbJW0ZaOfgNV0o0" data-clientId="{Unique client id}"></script>
+    </div>
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
@@ -949,7 +872,8 @@
     </div>
   </footer><!-- End Footer -->
 
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
   <script src="../assets/vendor/apexcharts/apexcharts.min.js"></script>
@@ -963,7 +887,184 @@
 
   <!-- Template Main JS File -->
   <script src="../assets/js/main.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
 
+      var table;
+      var labelData = [];
+      var valuesData = [];
+      var dict = [];
+      document.addEventListener('ct-ready', function (e) {
+        table = e.table;
+
+        // To get data for a column
+        table.on('init', function () {
+          console.log('Column');
+          console.log(table.column(2).data().toArray());
+          let data = table.rows({
+            page: 'current'
+          }).data().toArray()
+          console.log('Row');
+          console.log(table.rows({
+            page: 'current'
+          }).data().toArray());
+
+
+
+          data.forEach(element => {
+            if (element['l-3'][0]['dp-11'] !== null) {
+              console.log('-----------------------------');
+              var temp = element['l-3'][0]['dp-11'];
+              if (dict.length < 1) {
+                dict.push({
+                  "date": temp,
+                  "orders": 1
+                });
+              } else {
+                const index = dict.findIndex((obj => obj.date == temp));
+                const found = dict.some(e => e.date === temp);
+                if (!found) {
+                  dict.push({
+                    "date": temp,
+                    "orders": 1
+                  });
+                } else {
+                  dict[index]['orders'] += 1;
+                }
+              }
+            }
+          });
+
+
+          console.log(dict)
+          dict.forEach(element => {
+            labelData.push(element['date'])
+            valuesData.push(element['orders'])
+          });
+
+
+          new Chart(document.querySelector('#lineChart'), {
+            type: 'line',
+            data: {
+              labels: labelData,
+              datasets: [{
+                label: 'Orders By Month',
+                data: valuesData,
+                fill: false,
+                borderColor: 'rgb(75, 192, 192)',
+                tension: 0.5
+              }]
+            },
+            options: {
+              scales: {
+                y: {
+                  beginAtZero: true
+                }
+              }
+            }
+          });
+
+
+          new Chart(document.querySelector('#barChart'), {
+            type: 'bar',
+            data: {
+              labels: labelData,
+              datasets: [{
+                label: 'Leading By Orders',
+                data: valuesData,
+                backgroundColor: [
+                  'rgba(255, 99, 132, 0.2)',
+                  'rgba(255, 159, 64, 0.2)',
+                  'rgba(255, 205, 86, 0.2)',
+                  'rgba(75, 192, 192, 0.2)',
+                  'rgba(54, 162, 235, 0.2)',
+                  'rgba(153, 102, 255, 0.2)',
+                  'rgba(201, 203, 207, 0.2)'
+                ],
+                borderColor: [
+                  'rgb(255, 99, 132)',
+                  'rgb(255, 159, 64)',
+                  'rgb(255, 205, 86)',
+                  'rgb(75, 192, 192)',
+                  'rgb(54, 162, 235)',
+                  'rgb(153, 102, 255)',
+                  'rgb(201, 203, 207)'
+                ],
+                borderWidth: 1
+              }]
+            },
+            options: {
+              scales: {
+                y: {
+                  beginAtZero: true
+                }
+              }
+            }
+          });
+
+          dict=[]
+          labelData = [];
+          valuesData = [];
+
+          data.forEach(element => {
+            if (element['l-3'][0]['l-1'][0]['dp-6'] !== null) {
+              console.log('-----------------------------');
+              var temp = element['l-3'][0]['l-1'][0]['dp-6'].replace(`[{"text":"`, "").replace(`","type":"`, "").replace(`text"}]`, "");
+              if (dict.length < 1) {
+                dict.push({
+                  "name": temp,
+                  "orders": 1
+                });
+              } else {
+                const index = dict.findIndex((obj => obj.name == temp));
+                const found = dict.some(e => e.name === temp);
+                if (!found) {
+                  dict.push({
+                    "name": temp,
+                    "orders": 1
+                  });
+                } else {
+                  dict[index]['orders'] += 1;
+                }
+              }
+            }
+            
+          });
+
+          
+          console.log('new dict')
+          console.log(dict)
+          dict.forEach(element => {
+            labelData.push(element['name'])
+            valuesData.push(element['orders'])
+          });
+          console.log(labelData)
+          console.log(valuesData)
+
+          
+          new Chart(document.querySelector('#pieChart'), {
+            type: 'pie',
+            data: {
+              labels: labelData,
+              datasets: [{
+                label: 'Orders By Company',
+                data: valuesData,
+                backgroundColor: [
+                  'rgb(255, 99, 132)',
+                  'rgb(54, 162, 235)',
+                  'rgb(255, 205, 86)'
+                ],
+                hoverOffset: 2
+              }]
+            }
+          });
+        });
+      })
+    });
+  </script>
+  <script>
+
+  </script>
 </body>
 
 </html>
