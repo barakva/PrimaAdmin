@@ -562,8 +562,8 @@
               <h5 class="card-title">כמות פרויקטים לפי חברה</h5>
 
               <!-- Pie Chart -->
-              <canvas id="pieChart" style="max-height: 270px;"></canvas>
-              
+              <canvas id="pieChart" style="max-height: 370px;"></canvas>
+
               <!-- End Pie CHart -->
 
             </div>
@@ -665,7 +665,7 @@
             </div>
           </div>
         </div>
-<!-- 
+        <!-- 
         <div class="col-lg-6">
           <div class="card">
             <div class="card-body">
@@ -852,10 +852,42 @@
 
       </div>
     </section>
+    <div>
+      <script>
+        function createShipment(e, dt, node, config) {
+          // Open the create form
+          editors[1].create({
+            title: 'Create Shipment',
+            buttons: 'Save'
+          })
+
+          // Get the fields being displayed in the form
+          var displayed = editors[1].displayed();
+
+          // dp-274 is the name of the data point for the id
+          var id = tables[0].row({
+            selected: true
+          }).data()['dp-274'];
+
+          // and set the value
+          editor.set(displayed[0], id);
+        }
+
+        var tables = [];
+        var editors = [];
+
+        document.addEventListener('ct-ready', function (e) {
+          tables.push(e.table);
+          editors.push(e.editor);
+        });
+      </script>
+    </div>
     <div style="display: none;">
       <script src="https://wabrv2opx4.cloudtables.io/loader/443b781a-a172-11ec-8f1a-9b776e234b62/table/bs5"
         data-apiKey="uVp2dpI8ORbJW0ZaOfgNV0o0" data-clientId="{Unique client id}"></script>
     </div>
+    
+
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
@@ -894,7 +926,11 @@
       var labelData = [];
       var valuesData = [];
       var dict = [];
+
+
       document.addEventListener('ct-ready', function (e) {
+        console.log(e.table[0])
+
         table = e.table;
 
         // To get data for a column
@@ -1002,14 +1038,15 @@
             }
           });
 
-          dict=[]
+          dict = []
           labelData = [];
           valuesData = [];
 
           data.forEach(element => {
             if (element['l-3'][0]['l-1'][0]['dp-6'] !== null) {
               console.log('-----------------------------');
-              var temp = element['l-3'][0]['l-1'][0]['dp-6'].replace(`[{"text":"`, "").replace(`","type":"`, "").replace(`text"}]`, "");
+              var temp = element['l-3'][0]['l-1'][0]['dp-6'].replace(`[{"text":"`, "").replace(
+                `","type":"`, "").replace(`text"}]`, "");
               if (dict.length < 1) {
                 dict.push({
                   "name": temp,
@@ -1028,10 +1065,10 @@
                 }
               }
             }
-            
+
           });
 
-          
+
           console.log('new dict')
           console.log(dict)
           dict.forEach(element => {
@@ -1041,7 +1078,7 @@
           console.log(labelData)
           console.log(valuesData)
 
-          
+
           new Chart(document.querySelector('#pieChart'), {
             type: 'pie',
             data: {

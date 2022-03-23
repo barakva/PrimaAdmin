@@ -180,7 +180,43 @@
                 </script>
             </div>
         </div>
-
+        <script>
+            function createShipment(e, dt, node, config) {
+              // Open the create form
+              editors[1].create({
+                title: 'Create Shipment',
+                buttons: 'Save'
+              })
+    
+              // Get the fields being displayed in the form
+              var displayed = editors[1].displayed();
+    
+              // dp-274 is the name of the data point for the id
+              var id = tables[0].row({
+                selected: true
+              }).data()['dp-274'];
+    
+              // and set the value
+              editor.set(displayed[0], id);
+            }
+    
+            var tables = [];
+            var editors = [];
+    
+            document.addEventListener('ct-ready', function (e) {
+              tables.push(e.table);
+              editors.push(e.editor);
+            });
+          </script>
+          <div class="card">
+            <div class="card-body">
+                <div style="display: none;">
+                    <script src="https://prima.cloudtables.io/loader/69157f52-a175-11ec-8f1a-5b30089be684/table/d"
+                      data-apiKey="uVp2dpI8ORbJW0ZaOfgNV0o0" data-clientId="{Unique client id}"></script>
+                  </div>
+            </div>
+        </div>
+          
     </section>
 
   </main><!-- End #main -->
