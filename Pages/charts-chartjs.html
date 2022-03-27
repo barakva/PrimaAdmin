@@ -502,7 +502,7 @@
               <h5 class="card-title">כמות הזמנות לפי תאריכי סיום</h5>
 
               <!-- Line Chart -->
-              <canvas id="lineChart" style="max-height: 400px;min-height: 400px;"></canvas>
+              <canvas id="lineChart" style="max-height: 300px;min-height: 300px;"></canvas>
 
               <!-- End Line CHart -->
 
@@ -516,7 +516,7 @@
               <h5 class="card-title">כמות הזמנות לפי תאריכי סיום</h5>
 
               <!-- Bar Chart -->
-              <canvas id="barChart" style="max-height: 400px;min-height: 400px;"></canvas>
+              <canvas id="barChart" style="max-height: 300px;min-height: 300px;"></canvas>
               <script>
 
               </script>
@@ -532,7 +532,7 @@
               <h5 class="card-title">כמות פרויקטים לפי חברה</h5>
 
               <!-- Pie Chart -->
-              <canvas id="pieChart" style="max-height: 400px;min-height: 400px;"></canvas>
+              <canvas id="pieChart" style="max-height: 300px;min-height: 300px;"></canvas>
 
               <!-- End Pie CHart -->
 
@@ -822,38 +822,9 @@
 
       </div>
     </section>
-    <div>
-      <script>
-        function createShipment(e, dt, node, config) {
-          // Open the create form
-          editors[1].create({
-            title: 'Create Shipment',
-            buttons: 'Save'
-          })
-
-          // Get the fields being displayed in the form
-          var displayed = editors[1].displayed();
-
-          // dp-274 is the name of the data point for the id
-          var id = tables[0].row({
-            selected: true
-          }).data()['dp-274'];
-
-          // and set the value
-          editor.set(displayed[0], id);
-        }
-
-        var tables = [];
-        var editors = [];
-
-        document.addEventListener('ct-ready', function (e) {
-          tables.push(e.table);
-          editors.push(e.editor);
-        });
-      </script>
-    </div>
-    <div style="display: none;">
-      <script src="https://wabrv2opx4.cloudtables.io/loader/443b781a-a172-11ec-8f1a-9b776e234b62/table/bs5"
+    
+    <div style="">
+      <script src="https://prima.cloudtables.io/loader/443b781a-a172-11ec-8f1a-9b776e234b62/table/bs5"
         data-apiKey="uVp2dpI8ORbJW0ZaOfgNV0o0" data-clientId="{Unique client id}"></script>
     </div>
     
@@ -914,8 +885,8 @@
           console.log(table.rows({
             page: 'current'
           }).data().toArray());
-
-
+          
+          console.log(data)
 
           data.forEach(element => {
             if (element['l-3'][0]['dp-11'] !== null) {
@@ -1049,22 +1020,7 @@
           console.log(valuesData)
 
 
-          new Chart(document.querySelector('#pieChart'), {
-            type: 'pie',
-            data: {
-              labels: labelData,
-              datasets: [{
-                label: 'Orders By Company',
-                data: valuesData,
-                backgroundColor: [
-                  'rgb(255, 99, 132)',
-                  'rgb(54, 162, 235)',
-                  'rgb(255, 205, 86)'
-                ],
-                hoverOffset: 2
-              }]
-            }
-          });
+     
         });
       })
     });
