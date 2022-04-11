@@ -301,11 +301,23 @@
               editors[1].create({
                 title: 'Create Shipment',
                 buttons: 'Save'
+               
               })
-    
+              
               // Get the fields being displayed in the form
               var displayed = editors[1].displayed();
-    
+              // console.log(displayed[1])
+              // console.log(editors[1])
+              editors[1].node('l-10[].id').children[1].children[0].childNodes[0]
+              let sel = $("select")
+              console.log('sel')
+              console.log(sel)
+              sel.val(9).change()
+              console.log(sel)
+              console.log(editors[1].node('l-10[].id').children[1].children[0].childNodes[0])
+              // let s = editors[1].node('l-10[].id').children[1]
+              // console.log(s)
+
               // dp-274 is the name of the data point for the id
               var id = tables[0].row({
                 selected: true
@@ -313,6 +325,7 @@
     
               // and set the value
               editor.set(displayed[0], id);
+              editors[1].set(displayed[1], 2);
             }
     
             var tables = [];
