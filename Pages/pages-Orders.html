@@ -15,7 +15,9 @@
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    rel="stylesheet">
 
   <!-- Vendor CSS Files -->
   <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -114,7 +116,7 @@
               <i class="bi bi-circle"></i><span>Shipments</span>
             </a>
           </li>
-          
+
         </ul>
       </li>
 
@@ -165,16 +167,16 @@
       </li> -->
 
       <li class="nav-item">
-        
-         
-        
+
+
+
         <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
             <a href="charts-chartjs.html">
               <i class="bi bi-circle"></i><span>Charts</span>
             </a>
           </li>
-         
+
         </ul>
       </li><!-- End Charts Nav -->
 
@@ -263,99 +265,106 @@
     </div><!-- End Page Title -->
 
     <section class="section">
-        <div class="row">
-            <div class="col-lg-6">
+      <div class="row">
+        <div class="col-lg-6">
 
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Example Card</h5>
-                        <p>This is an examle page with no contrnt. You can use it as a starter for your custom pages.</p>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="col-lg-6">
-
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Example Card</h5>
-                        <p>This is an examle page with no contrnt. You can use it as a starter for your custom pages.</p>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-body">
-                <script src="https://prima.cloudtables.io/loader/443b781a-a172-11ec-8f1a-9b776e234b62/table/d"
-                        data-apiKey="uVp2dpI8ORbJW0ZaOfgNV0o0"
-                        data-clientId="{Unique client id}">
-                </script>
-            </div>
-        </div>
-        <script>
-            function createShipment(e, dt, node, config) {
-              // Open the create form
-              editors[1].create({
-                title: 'Create Shipment',
-                buttons: 'Save'
-               
-              })
-              
-              // Get the fields being displayed in the form
-              var displayed = editors[1].displayed();
-              // console.log(displayed[1])
-              // console.log(editors[1])
-              editors[1].node('l-10[].id').children[1].children[0].childNodes[0]
-              let sel = $("select")
-              console.log('sel')
-              console.log(sel)
-              sel.val(9).change()
-              console.log(sel)
-              console.log(editors[1].node('l-10[].id').children[1].children[0].childNodes[0])
-              // let s = editors[1].node('l-10[].id').children[1]
-              // console.log(s)
-
-              // dp-274 is the name of the data point for the id
-              var id = tables[0].row({
-                selected: true
-              }).data()['dp-274'];
-    
-              // and set the value
-              editor.set(displayed[0], id);
-              editors[1].set(displayed[1], 2);
-            }
-    
-            var tables = [];
-            var editors = [];
-    
-            document.addEventListener('ct-ready', function (e) {
-              tables.push(e.table);
-              editors.push(e.editor);
-              
-              tables[0].on('init', function () {
-
-                console.log(e.table.rows({ page: 'current'}).data().toArray())
-              })
-            });
-          </script>
           <div class="card">
             <div class="card-body">
-                <div style="display: none;">
-                    <script src="https://prima.cloudtables.io/loader/69157f52-a175-11ec-8f1a-5b30089be684/table/d"
-                      data-apiKey="uVp2dpI8ORbJW0ZaOfgNV0o0" data-clientId="{Unique client id}"></script>
-                  </div>
+              <h5 class="card-title">Example Card</h5>
+              <p>This is an examle page with no contrnt. You can use it as a starter for your custom pages.</p>
             </div>
+          </div>
+
         </div>
+
+        <div class="col-lg-6">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Example Card</h5>
+              <p>This is an examle page with no contrnt. You can use it as a starter for your custom pages.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <script src="https://prima.cloudtables.io/loader/443b781a-a172-11ec-8f1a-9b776e234b62/table/d"
+            data-apiKey="uVp2dpI8ORbJW0ZaOfgNV0o0" data-clientId="{Unique client id}">
+          </script>
+        </div>
+      </div>
+      <script>
+        var tables = [];
+        var editors = [];
+        var clickedData;
+        document.addEventListener('ct-ready', function (e) {
+          tables.push(e.table);
+          editors.push(e.editor);
           
+
+          $('#ct-443b781a-a172-11ec-8f1a-9b776e234b62 tbody').on('click', 'tr', function () {
+            if(e.table.row(this).data()!==undefined)
+            clickedData = e.table.row(this).data()
+            console.log('clickedData1')
+            console.log(clickedData)
+          });
+          tables[0].on('init', function () {
+
+            console.log(e.table.rows({
+              page: 'current'
+            }).data().toArray())
+          })
+        });
+
+        function createShipment(e, dt, node, config) {
+          // Open the create form
+          console.log('clickedData2')
+          console.log(clickedData)
+          
+
+          editors[1].create({
+            title: 'Create Shipment',
+            buttons: 'Save'
+
+          })
+          let sel = $("select")
+          // Get the fields being displayed in the form
+          var displayed = editors[1].displayed();
+          
+
+          // dp-274 is the name of the data point for the id
+          // var id = tables[0].row({
+          //   selected: true
+          // }).data()['dp-274'];
+
+
+          // and set the value
+          // editor.set(displayed[0], id);
+          sel.val(clickedData['dp-19']).change()
+          
+        }
+
+        
+      </script>
+      <div class="card">
+        <div class="card-body">
+          <div style="display: none;">
+            <script src="https://prima.cloudtables.io/loader/69157f52-a175-11ec-8f1a-5b30089be684/table/d"
+              data-apiKey="uVp2dpI8ORbJW0ZaOfgNV0o0" data-clientId="{Unique client id}"></script>
+          </div>
+        </div>
+      </div>
+
     </section>
 
   </main><!-- End #main -->
 
 
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
   <script src="../assets/vendor/apexcharts/apexcharts.min.js"></script>
