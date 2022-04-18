@@ -1,3 +1,5 @@
+const { callback } = require("../vendor/chart.js/helpers.esm");
+
 /**
 * Template Name: NiceAdmin - v2.2.2
 * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
