@@ -2,36 +2,45 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+  </script>
+    <title>Prima Solutions</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
 
-  <title>Prima Solutions</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
+    <!-- Favicons -->
+    <link href="../assets/img/favicon.png" rel="icon">
+    <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
-  <!-- Favicons -->
-  <link href="../assets/img/favicon.png" rel="icon">
-  <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect">
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+        rel="stylesheet">
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.gstatic.com" rel="preconnect">
-  <link
-    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-    rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="../assets/vendor/quill/quill.snow.css" rel="stylesheet">
+    <link href="../assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+    <link href="../assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="../assets/vendor/simple-datatables/style.css" rel="stylesheet">
 
-  <!-- Vendor CSS Files -->
-  <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="../assets/vendor/quill/quill.snow.css" rel="stylesheet">
-  <link href="../assets/vendor/quill/quill.bubble.css" rel="stylesheet">
-  <link href="../assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="../assets/vendor/simple-datatables/style.css" rel="stylesheet">
+    <!-- Template Main CSS File -->
+    <link href="../assets/css/style.css" rel="stylesheet">
 
-  <!-- Template Main CSS File -->
-  <link href="../assets/css/style.css" rel="stylesheet">
-
-  <!-- =======================================================
+    <!-- =======================================================
   * Template Name: NiceAdmin - v2.2.2
   * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
   * Author: BootstrapMade.com
@@ -146,7 +155,7 @@
             <div class="card">
                 <div class="card-body">
                     <script src="https://prima.cloudtables.io/loader/443b781a-a172-11ec-8f1a-9b776e234b62/table/d"
-                            data-apiKey="uVp2dpI8ORbJW0ZaOfgNV0o0" data-clientId="{Unique client id}">
+                        data-apiKey="uVp2dpI8ORbJW0ZaOfgNV0o0" data-clientId="{Unique client id}">
                     </script>
                 </div>
             </div>
@@ -154,9 +163,30 @@
                 var tables = [];
                 var editors = [];
                 var clickedData;
+
+                var order = {
+                    table: null,
+                    editor: null,
+                    id: 'ct-443b781a-a172-11ec-8f1a-9b776e234b62',
+                    selected: null
+                };
+                var shipment = {
+                    table: null,
+                    editor: null,
+                    id: 'ct-69157f52-a175-11ec-8f1a-5b30089be684'
+                };
+
                 document.addEventListener('ct-ready', function (e) {
                     tables.push(e.table);
                     editors.push(e.editor);
+                    if (e.table.table().node().id === order.id) {
+                        order.table = e.table;
+                        order.editor = e.editor;
+                        e.table.select.style('single');
+                    } else if (e.table.table().node().id === shipment.id) {
+                        shipment.table = e.table;
+                        shipment.editor = e.editor;
+                    }
 
 
                     $('#ct-443b781a-a172-11ec-8f1a-9b776e234b62 tbody').on('click', 'tr', function () {
@@ -164,19 +194,16 @@
                             clickedData = e.table.row(this).data()
                         console.log('clickedData1')
                         console.log(clickedData)
-                    });
-                    tables[0].on('init', function () {
 
-                        console.log(e.table.rows({
-                            page: 'current'
-                        }).data().toArray())
-                    })
+                    });
+
+
                 });
 
                 function createShipment(e, dt, node, config) {
                     // Open the create form
-                    console.log('clickedData2')
-                    console.log(clickedData)
+                    console.log('clickedData2');
+                    console.log(clickedData);
 
 
                     editors[1].create({
@@ -184,33 +211,75 @@
                         buttons: 'Save'
 
                     })
-                    let sel = $("select")
-                    // Get the fields being displayed in the form
-                    var displayed = editors[1].displayed();
+                    //preparing form elements
+                    let testi;
+                    let sel = $("select");
+                    let select1 = $(sel[0]);
+                    let select2 = $(sel[1]);
+
+                    //init create shipment with row data
+                    //console.log(clickedData['l-14'][0]['dp-25'].replace('[{\"text\":\"','').replace('\",\"type\":\"text\"}]',''))
+                    select2[0].forEach(element => {
+
+                        if (element.innerHTML === clickedData['l-14'][0]['dp-25'].replace('[{\"text\":\"', '')
+                            .replace(
+                                '\",\"type\":\"text\"}]', ''))
+                            testi = element.value;
+                    });
+
+                    //set the row values to the form elements
+                    select1.val(clickedData['dp-19']).change();
+                    select2.val(testi);
 
 
-                    // dp-274 is the name of the data point for the id
-                    // var id = tables[0].row({
-                    //   selected: true
-                    // }).data()['dp-274'];
-
-
-                    // and set the value
-                    // editor.set(displayed[0], id);
-                    sel.val(clickedData['dp-19']).change()
-
+                    console.log('shipment')
+                    console.log(shipment)
+                    shipment.editor.on('closed', function () {
+                        // Once shipment closed, update the order automatically
+                        var id = order.table.row({
+                            selected: true
+                        }).data();
+                        console.log('selected')
+                        console.log(order.table.row({
+                            selected: true
+                        }).data())
+                        order.editor.edit(clickedData, false).set(clickedData['l-18'][0]['dp-52'], 'SHIPPED')
+                            .submit();
+                    })
                 }
-
-
             </script>
             <div class="card">
                 <div class="card-body">
                     <div style="display: none;">
                         <script src="https://prima.cloudtables.io/loader/69157f52-a175-11ec-8f1a-5b30089be684/table/d"
-                                data-apiKey="uVp2dpI8ORbJW0ZaOfgNV0o0" data-clientId="{Unique client id}"></script>
+                            data-apiKey="uVp2dpI8ORbJW0ZaOfgNV0o0" data-clientId="{Unique client id}"></script>
                     </div>
                 </div>
             </div>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                Launch demo modal
+              </button>
+        
+              <!-- Modal -->
+              <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLongTitle">file upload</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      
+                    </div>
+                    <div class="modal-footer">
+                      <input type='file' id="readUrl">
+                    </div>
+                  </div>
+                </div>
+              </div>
 
         </section>
 

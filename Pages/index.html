@@ -52,238 +52,372 @@
         <script>
             var i = 0;
             document.addEventListener("DOMContentLoaded", () => {
-                var tables = [];
-                var editors = [];
-                var table;
-                var labelData = [];
-                var valuesData = [];
-                var dict = [];
-                var numOfProjects = []
-
-                document.addEventListener('ct-ready', function (e) {
-                    tables.push(e.table);
-                    editors.push(e.editor);
-
-
-
-
-                    i++
-                    // To get data for a column
-                    tables[3].on('init', function () {
-                        tables.forEach(element => {
-                            console.log(element)
-                            if (element.table().node().id === 'ct-d9190b3c-a159-11ec-9c52-d36d2beca7dd') {
-                                console.log('1')
-                                console.log(element.rows({
-                                    page: 'current'
-                                }).data().toArray().length)
-                                console.log(element.rows({
-                                    page: 'current'
-                                }).data().toArray().length)
-                                console.log(element.rows({
-                                    page: 'current'
-                                }).data().toArray().length)
-
-
-                                numOfCustomers = element.rows({
-                                    page: 'current'
-                                }).data().toArray().length
-                                console.log('numOfCustomers')
-                                console.log(numOfCustomers)
-                                $('#numOfCustomers').html(numOfCustomers)
-
-
+              var tables = [];
+              var editors = [];
+              var table;
+              var labelData = [];
+              var valuesData = [];
+              var dict = [];
+              var numOfProjects = []
+              var averageOrdersPerDay = 0;
+              var ordersPerDay = [0, 0, 0];
+              var barChartDict = [];
+              var barChartLabel = [];
+              var barChartVal = [];
+      
+              let ctx2 = document.getElementById("barChart").getContext("2d");
+              let ctx3 = document.getElementById("barChart2").getContext("2d");
+              let ctx4 = document.getElementById("pieChart").getContext("2d");
+              let ctx5 = document.getElementById("pieChart2").getContext("2d");
+              let ctx6 = document.getElementById("pieChart3").getContext("2d");
+              
+              document.addEventListener('ct-ready', function (e) {
+                tables.push(e.table);
+                editors.push(e.editor);
+                i++
+                // To get data for a column
+                tables[4].on('init',  function () {
+                  tables.forEach(element => {
+                    console.log(element)
+                    if (element.table().node().id === 'ct-d9190b3c-a159-11ec-9c52-d36d2beca7dd') {
+                      console.log('1')
+                      console.log(element.rows({
+                        page: 'current'
+                      }).data().toArray().length)
+                      console.log(element.rows({
+                        page: 'current'
+                      }).data().toArray().length)
+                      console.log(element.rows({
+                        page: 'current'
+                      }).data().toArray().length)
+      
+      
+                      numOfCustomers = element.rows({
+                        page: 'current'
+                      }).data().toArray().length
+                      console.log('numOfCustomers')
+                      console.log(numOfCustomers)
+                      $('#numOfCustomers').html(numOfCustomers)
+      
+      
+                    }
+                    if (element.table().node().id === 'ct-44b5dcda-a15a-11ec-9c52-cf9146f7391f') {
+                      
+                      console.log('2')
+                      numOfProjects = element.rows({
+                        page: 'current'
+                      }).data().toArray().length
+                      console.log('numOfProjects=' + numOfProjects)
+                      console.log(element.rows({
+                        page: 'current'
+                      }).data().toArray())
+                      $('#numOfProjects').html(numOfProjects)
+                      averageOrdersPerDay = numOfProjects / 31
+                      console.log('ordersPerDay')
+                      console.log(averageOrdersPerDay.toFixed(5))
+      
+                    }
+                    if (element.table().node().id === 'ct-443b781a-a172-11ec-8f1a-9b776e234b62') {
+                      console.log('3')
+                      numOfOrders = element.rows({
+                        page: 'current'
+                      }).data().toArray().length
+                      console.log(numOfOrders)
+                      $('#numOfOrders').html(numOfOrders)
+      
+                      console.log('4')
+                      let data = element.rows({
+                        page: 'current'
+                      }).data().toArray()
+                      console.log('Row');
+                      console.log(element.rows({
+                        page: 'current'
+                      }).data().toArray());
+      
+                      console.log(data)
+      
+                      data.forEach(element => {
+                        let temp;
+                        if(element['dp-40'] !== null){
+                          console.log('date')
+                          console.log()
+                          temp = new Date(element['dp-40']).toLocaleDateString();
+                          if (barChartDict.length < 1) {
+                            barChartDict.push({
+                              "date": temp,
+                              "orders": 1
+                            });
+                          } else {
+                            const index = barChartDict.findIndex((obj => obj.date == temp));
+                            const found = barChartDict.some(e => e.date === temp);
+                            if (!found) {
+                              barChartDict.push({
+                                "date": temp,
+                                "orders": 1
+                              });
+                            } else {
+                              barChartDict[index]['orders'] += 1;
                             }
-                            if (element.table().node().id === 'ct-44b5dcda-a15a-11ec-9c52-cf9146f7391f') {
-
-                                console.log('2')
-                                numOfProjects = element.rows({
-                                    page: 'current'
-                                }).data().toArray().length
-                                console.log('numOfProjects=' + numOfProjects)
-                                console.log(element.rows({
-                                    page: 'current'
-                                }).data().toArray())
-                                $('#numOfProjects').html(numOfProjects)
-
+                        }
+                      }
+                        if (element['l-18'][0]['dp-52'].includes('תקין')) {
+                          ordersPerDay[0]++
+                        } else if (element['l-18'][0]['dp-52'].includes('עיכוב קל')) {
+                          ordersPerDay[1]++
+                        } else if (element['l-18'][0]['dp-52'].includes('עיכוב חמור')) {
+                          ordersPerDay[2]++
+                        }
+                        if (element['dp-11'] !== null) {
+                          console.log('-----------------------------');
+                           temp = element['l-3'][0]['dp-11'];
+                          if (dict.length < 1) {
+                            dict.push({
+                              "date": temp,
+                              "orders": 1
+                            });
+                          } else {
+                            const index = dict.findIndex((obj => obj.date == temp));
+                            const found = dict.some(e => e.date === temp);
+                            if (!found) {
+                              dict.push({
+                                "date": temp,
+                                "orders": 1
+                              });
+                            } else {
+                              dict[index]['orders'] += 1;
                             }
-                            if (element.table().node().id === 'ct-443b781a-a172-11ec-8f1a-9b776e234b62') {
-                                console.log('3')
-                                numOfOrders = element.rows({
-                                    page: 'current'
-                                }).data().toArray().length
-                                console.log(numOfOrders)
-                                $('#numOfOrders').html(numOfOrders)
+                          }
+                        }
+                      });
+                      console.log('ordersPerDay')
+                      console.log(ordersPerDay)
+      
+                      console.log(dict)
+                      dict.forEach(element => {
+                        labelData.push(element['date'])
+                        valuesData.push(element['orders'])
+                      });
+                      barChartDict.forEach(element => {
+                        barChartLabel.push(element['date'])
+                        barChartVal.push(element['orders'])
+                      });
+                      console.log('barChartDict')
+                      console.log(barChartDict)
+      
+                      //  new Chart(ctx, {
+                      //   type: 'line',
+                      //   data: {
+                      //     labels: labelData,
+                      //     datasets: [{
+                      //       label: 'Projects By Month',
+                      //       data: valuesData,
+                      //       fill: false,
+                      //       borderColor: 'rgb(75, 192, 192)',
+                      //       tension: 0.5
+                      //     }]
+                      //   },
+                      //   options: {
+                      //     scales: {
+                      //       y: {
+                      //         beginAtZero: true
+                      //       }
+                      //     }
+                      //   }
+                      // });
+      
+                       new Chart(ctx2, {
+                        type: 'bar',
+                        data: {
+                          labels: labelData,
+                          datasets: [{
+                            label: 'Leading By Projects',
+                            data: valuesData,
+                            backgroundColor: [
+                              'rgba(255, 99, 132, 0.2)',
+                              'rgba(255, 159, 64, 0.2)',
+                              'rgba(255, 205, 86, 0.2)',
+                              'rgba(75, 192, 192, 0.2)',
+                              'rgba(54, 162, 235, 0.2)',
+                              'rgba(153, 102, 255, 0.2)',
+                              'rgba(201, 203, 207, 0.2)'
+                            ],
+                            borderColor: [
+                              'rgb(255, 99, 132)',
+                              'rgb(255, 159, 64)',
+                              'rgb(255, 205, 86)',
+                              'rgb(75, 192, 192)',
+                              'rgb(54, 162, 235)',
+                              'rgb(153, 102, 255)',
+                              'rgb(201, 203, 207)'
+                            ],
+                            borderWidth: 1
+                          }]
+                        },
+                        options: {
+                          scales: {
+                            y: {
+                              beginAtZero: true
                             }
-                            if (element.table().node().id === 'ct-443b781a-a172-11ec-8f1a-9b776e234b62') {
-
-
-                                console.log('4')
-                                let data = element.rows({
-                                    page: 'current'
-                                }).data().toArray()
-                                console.log('Row');
-                                console.log(element.rows({
-                                    page: 'current'
-                                }).data().toArray());
-
-                                console.log(data)
-
-                                data.forEach(element => {
-                                    if (element['dp-11'] !== null) {
-                                        console.log('-----------------------------');
-                                        var temp = element['l-3'][0]['dp-11'];
-                                        if (dict.length < 1) {
-                                            dict.push({
-                                                "date": temp,
-                                                "orders": 1
-                                            });
-                                        } else {
-                                            const index = dict.findIndex((obj => obj.date == temp));
-                                            const found = dict.some(e => e.date === temp);
-                                            if (!found) {
-                                                dict.push({
-                                                    "date": temp,
-                                                    "orders": 1
-                                                });
-                                            } else {
-                                                dict[index]['orders'] += 1;
-                                            }
-                                        }
-                                    }
-                                });
-
-
-                                console.log(dict)
-                                dict.forEach(element => {
-                                    labelData.push(element['date'])
-                                    valuesData.push(element['orders'])
-                                });
-
-
-                                new Chart(document.querySelector('#lineChart'), {
-                                    type: 'line',
-                                    data: {
-                                        labels: labelData,
-                                        datasets: [{
-                                            label: 'Projects By Month',
-                                            data: valuesData,
-                                            fill: false,
-                                            borderColor: 'rgb(75, 192, 192)',
-                                            tension: 0.5
-                                        }]
-                                    },
-                                    options: {
-                                        scales: {
-                                            y: {
-                                                beginAtZero: true
-                                            }
-                                        }
-                                    }
-                                });
-
-                                new Chart(document.querySelector('#barChart'), {
-                                    type: 'bar',
-                                    data: {
-                                        labels: labelData,
-                                        datasets: [{
-                                            label: 'Leading By Projects',
-                                            data: valuesData,
-                                            backgroundColor: [
-                                                'rgba(255, 99, 132, 0.2)',
-                                                'rgba(255, 159, 64, 0.2)',
-                                                'rgba(255, 205, 86, 0.2)',
-                                                'rgba(75, 192, 192, 0.2)',
-                                                'rgba(54, 162, 235, 0.2)',
-                                                'rgba(153, 102, 255, 0.2)',
-                                                'rgba(201, 203, 207, 0.2)'
-                                            ],
-                                            borderColor: [
-                                                'rgb(255, 99, 132)',
-                                                'rgb(255, 159, 64)',
-                                                'rgb(255, 205, 86)',
-                                                'rgb(75, 192, 192)',
-                                                'rgb(54, 162, 235)',
-                                                'rgb(153, 102, 255)',
-                                                'rgb(201, 203, 207)'
-                                            ],
-                                            borderWidth: 1
-                                        }]
-                                    },
-                                    options: {
-                                        scales: {
-                                            y: {
-                                                beginAtZero: true
-                                            }
-                                        }
-                                    }
-                                });
-
-                                dict = []
-                                labelData = [];
-                                valuesData = [];
-                                console.log('pie')
-                                data.forEach(element => {
-                                    console.log(element)
-                                    if (element['l-3'][0]['l-1'][0]['dp-6'] !== null) {
-                                        console.log('-----------------------------');
-                                        var temp = element['l-3'][0]['l-1'][0]['dp-6'].replace(`[{"text":"`, "")
-                                            .replace(
-                                                `","type":"`, "").replace(`text"}]`, "");
-                                        if (dict.length < 1) {
-                                            dict.push({
-                                                "name": temp,
-                                                "orders": 1
-                                            });
-                                        } else {
-                                            const index = dict.findIndex((obj => obj.name == temp));
-                                            const found = dict.some(e => e.name === temp);
-                                            if (!found) {
-                                                dict.push({
-                                                    "name": temp,
-                                                    "orders": 1
-                                                });
-                                            } else {
-                                                dict[index]['orders'] += 1;
-                                            }
-                                        }
-                                    }
-
-                                });
-
-
-                                console.log('new dict')
-                                console.log(dict)
-                                dict.forEach(element => {
-                                    labelData.push(element['name'])
-                                    valuesData.push(element['orders'])
-                                });
-                                console.log(labelData)
-                                console.log(valuesData)
-
-
-                                new Chart(document.querySelector('#pieChart'), {
-                                    type: 'pie',
-                                    data: {
-                                        labels: labelData,
-                                        datasets: [{
-                                            label: 'Orders By Company',
-                                            data: valuesData,
-                                            backgroundColor: [
-                                                'rgb(255, 99, 132)',
-                                                'rgb(54, 162, 235)',
-                                                'rgb(255, 205, 86)'
-                                            ],
-                                            hoverOffset: 2
-                                        }]
-                                    }
-                                });
+                          }
+                        }
+                      });
+                      
+                       new Chart(ctx3, {
+                        type: 'bar',
+                        data: {
+                          labels: barChartLabel,
+                          datasets: [{
+                            label: 'Leading By Projects',
+                            data: barChartVal,
+                            backgroundColor: [
+                              'rgba(255, 99, 132, 0.2)',
+                              'rgba(255, 159, 64, 0.2)',
+                              'rgba(255, 205, 86, 0.2)',
+                              'rgba(75, 192, 192, 0.2)',
+                              'rgba(54, 162, 235, 0.2)',
+                              'rgba(153, 102, 255, 0.2)',
+                              'rgba(201, 203, 207, 0.2)'
+                            ],
+                            borderColor: [
+                              'rgb(255, 99, 132)',
+                              'rgb(255, 159, 64)',
+                              'rgb(255, 205, 86)',
+                              'rgb(75, 192, 192)',
+                              'rgb(54, 162, 235)',
+                              'rgb(153, 102, 255)',
+                              'rgb(201, 203, 207)'
+                            ],
+                            borderWidth: 1
+                          }]
+                        },
+                        options: {
+                          scales: {
+                            y: {
+                              beginAtZero: true
                             }
-                        })
-                    });
-                })
+                          }
+                        }
+                      });
+                      dict = []
+                      labelData = [];
+                      valuesData = [];
+                      console.log('pie')
+                      console.log(data)
+                      data.forEach(element => {
+                        console.log(element)
+                        if (element['l-3'][0]['l-1'][0]['dp-6'] !== null) {
+                          console.log('-----------------------------');
+                          var temp = element['l-3'][0]['l-1'][0]['dp-6'].replace(`[{"text":"`, "")
+                            .replace(
+                              `","type":"`, "").replace(`text"}]`, "");
+                          if (dict.length < 1) {
+                            dict.push({
+                              "name": temp,
+                              "orders": 1
+                            });
+                          } else {
+                            const index = dict.findIndex((obj => obj.name == temp));
+                            const found = dict.some(e => e.name === temp);
+                            if (!found) {
+                              dict.push({
+                                "name": temp,
+                                "orders": 1
+                              });
+                            } else {
+                              dict[index]['orders'] += 1;
+                            }
+                          }
+                        }
+      
+                      });
+      
+      
+                      console.log('new dict')
+                      console.log(dict)
+                      dict.forEach(element => {
+                        labelData.push(element['name'])
+                        valuesData.push(element['orders'])
+                      });
+                      console.log(labelData)
+                      console.log(valuesData)
+      
+                      
+                       new Chart(ctx4, {
+                        type: 'pie',
+                        data: {
+                          labels: labelData,
+                          datasets: [{
+                            label: 'Orders By Company',
+                            data: valuesData,
+                            backgroundColor: [
+                              'rgb(255, 99, 132)',
+                              'rgb(54, 162, 235)',
+                              'rgb(255, 205, 86)'
+                            ],
+                            hoverOffset: 2
+                          }]
+                        }
+                      });
+                      
+                       new Chart(ctx5, {
+                        type: 'pie',
+                        data: {
+                          labels: ['תקין', 'עיכוב קל', 'עיכוב חמור'],
+                          datasets: [{
+                            label: 'Orders By Company',
+                            data: ordersPerDay,
+                            backgroundColor: [
+                              'rgb(255, 99, 132)',
+                              'rgb(54, 162, 235)',
+                              'rgb(255, 205, 86)'
+                            ],
+                            hoverOffset: 2
+                          }]
+                        }
+                      });
+                      
+                    }
+                    if(element.table().node().id==='ct-0b4cd654-a175-11ec-8f1a-3fd907b353fa'){
+                      console.log('QA table')
+                      var problemsArr=[0,0,0,0]
+                      numOfOrders = element.rows({
+                        page: 'current'
+                      }).data().toArray()
+                      
+                      numOfOrders.forEach(element => {
+                        if (element['l-24'][0]['dp-61'].includes('בעיית צבע')) {
+                          problemsArr[0]++
+                        } else if (element['l-24'][0]['dp-61'].includes('טעות במידה')) {
+                          problemsArr[1]++
+                        } else if (element['l-24'][0]['dp-61'].includes('שבר')) {
+                          problemsArr[2]++
+                        }else if (element['l-24'][0]['dp-61'].includes('אחר')) {
+                          problemsArr[3]++
+                        }
+                      });
+                      console.log(numOfOrders)
+                       new Chart(ctx6, {
+                        type: 'pie',
+                        data: {
+                          labels: ['בעיית צבע', 'טעות במידה', 'שבר','אחר'],
+                          datasets: [{
+                            label: 'Orders By Company',
+                            data: problemsArr,
+                            backgroundColor: [
+                              'rgb(255, 99, 132)',
+                              'rgb(54, 162, 235)',
+                              'rgb(255, 205, 86)'
+                            ],
+                            hoverOffset: 2
+                          }]
+                        }
+                      });
+                    }
+                  })
+                });
+              })
             })
-        </script>
+          </script>
     </header><!-- End Header -->
 
     <!-- ======= Sidebar ======= -->
@@ -453,46 +587,69 @@
                         <!-- Reports -->
                         <div class="col-lg-6">
                             <div class="card">
-                                <div id="lineChartBody" class="card-body">
-                                    <h5 class="card-title">Projects Ends By Date</h5>
-
-                                    <!-- Line Chart -->
-                                    <canvas id="lineChart" style=""></canvas>
-
-                                    <!-- End Line CHart -->
-
-                                </div>
+                              <div class="card-body">
+                                <h5 class="card-title">Projects Ends By Date</h5>
+              
+                                <!-- Bar Chart -->
+                                <canvas id="barChart" style=""></canvas>
+              
+                                <!-- End Bar CHart -->
+              
+                              </div>
                             </div>
-                        </div>
-                        <!-- End Reports -->
-                        <div class="col-lg-6">
+                          </div>
+                          <div class="col-6">
                             <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title">Projects Ends By Date</h5>
-
-                                    <!-- Bar Chart -->
-                                    <canvas id="barChart" style=""></canvas>
-                                    <script>
-
-                                    </script>
-                                    <!-- End Bar CHart -->
-
-                                </div>
+                              <div class="card-body">
+                                <h5 class="card-title">Projects Created By Day</h5>
+              
+                                <!-- Bar Chart -->
+                                <canvas id="barChart2" style=""></canvas>
+              
+                                <!-- End Bar CHart -->
+              
+                              </div>
                             </div>
-                        </div>
-                        <div class="col-lg-12">
+                          </div>
+                          <div class="col-6">
                             <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title">Number of projects by company</h5>
-
-                                    <!-- Pie Chart -->
-                                    <canvas id="pieChart" style="max-height: 300px;min-height: 300px;"></canvas>
-
-                                    <!-- End Pie CHart -->
-
-                                </div>
+                              <div class="card-body">
+                                <h5 class="card-title">Orders Status</h5>
+              
+                                <!-- Pie Chart -->
+                                <canvas id="pieChart2" style="max-height: 374px;"></canvas>
+              
+                                <!-- End Pie CHart -->
+              
+                              </div>
                             </div>
-                        </div>
+                          </div>
+                          <div class="col-lg-6">
+                            <div class="card">
+                              <div class="card-body">
+                                <h5 class="card-title">Faluty Orders</h5>
+              
+                                <!-- Pie Chart -->
+                                <canvas id="pieChart3" style="max-height: 374px;"></canvas>
+              
+                                <!-- End Pie CHart -->
+              
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-lg-12">
+                            <div class="card">
+                              <div class="card-body">
+                                <h5 class="card-title">Number of projects by company</h5>
+              
+                                <!-- Pie Chart -->
+                                <canvas id="pieChart" style="max-height: 300px;min-height: 300px;"></canvas>
+              
+                                <!-- End Pie CHart -->
+              
+                              </div>
+                            </div>
+                          </div>
 
 
 
@@ -531,15 +688,17 @@
     <script src="../assets/js/main.js"></script>
 
     <div style="display: none;">
-        <script src="https://prima.cloudtables.io/loader/44b5dcda-a15a-11ec-9c52-cf9146f7391f/table/d"
-                data-apiKey="uVp2dpI8ORbJW0ZaOfgNV0o0" data-clientId="{Unique client id}"></script>
+        <script  src="https://prima.cloudtables.io/loader/44b5dcda-a15a-11ec-9c52-cf9146f7391f/table/d"
+          data-apiKey="uVp2dpI8ORbJW0ZaOfgNV0o0" data-clientId="{Unique client id}"></script>
         <script src="https://prima.cloudtables.io/loader/d9190b3c-a159-11ec-9c52-d36d2beca7dd/table/d"
-                data-apiKey="uVp2dpI8ORbJW0ZaOfgNV0o0" data-clientId="{Unique client id}"></script>
+          data-apiKey="uVp2dpI8ORbJW0ZaOfgNV0o0" data-clientId="{Unique client id}"></script>
         <script src="https://prima.cloudtables.io/loader/443b781a-a172-11ec-8f1a-9b776e234b62/table/d"
-                data-apiKey="uVp2dpI8ORbJW0ZaOfgNV0o0" data-clientId="{Unique client id}"></script>
+          data-apiKey="uVp2dpI8ORbJW0ZaOfgNV0o0" data-clientId="{Unique client id}"></script>
         <script src="https://prima.cloudtables.io/loader/69157f52-a175-11ec-8f1a-5b30089be684/table/d"
-                data-apiKey="uVp2dpI8ORbJW0ZaOfgNV0o0" data-clientId="{Unique client id}"></script>
-    </div>
+          data-apiKey="uVp2dpI8ORbJW0ZaOfgNV0o0" data-clientId="{Unique client id}"></script>
+          <script src="https://prima.cloudtables.io/loader/0b4cd654-a175-11ec-8f1a-3fd907b353fa/table/d"
+          data-apiKey="uVp2dpI8ORbJW0ZaOfgNV0o0" data-clientId="{Unique client id}"></script>
+      </div>
 </body>
 
 </html>
