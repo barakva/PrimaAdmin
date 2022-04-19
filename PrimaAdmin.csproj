@@ -558,6 +558,8 @@
     <Content Include="assets\vendor\tinymce\README.md" />
     <Content Include="assets\vendor\tinymce\skins\ui\oxide-dark\fonts\tinymce-mobile.woff" />
     <Content Include="assets\vendor\tinymce\skins\ui\oxide\fonts\tinymce-mobile.woff" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\IISProfile.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
