@@ -240,14 +240,17 @@
           //preparing form elements
           let testi;
           let sel = $("select");
+          let btn = $(".btn")
+          console.log(btn[12])
+          btn = $(btn[12])
           let select1 = $(sel[0]);
           let select2 = $(sel[1]);
-
-          //init create shipment with row data
-          //console.log(clickedData['l-14'][0]['dp-25'].replace('[{\"text\":\"','').replace('\",\"type\":\"text\"}]',''))
+          btn.on('click', function () {
+            order.editor.edit(order.table.row({selected: true}), false).set('l-18[].id', 'נשלחה').submit();
+          })
+          
           select2[0].forEach(element => {
-
-            if (element.innerHTML === clickedData['l-14'][0]['dp-25'].replace('[{\"text\":\"', '').replace(
+              if (element.innerHTML === clickedData['l-14'][0]['dp-25'].replace('[{\"text\":\"', '').replace(
                 '\",\"type\":\"text\"}]', ''))
               testi = element.value;
           });
@@ -259,17 +262,18 @@
           
           console.log('shipment')
           console.log(shipment)
-          shipment.editor.on('closed', function () {
-            // Once shipment closed, update the order automatically
-            var id = order.table.row({
-              selected: true
-            }).data();
-            console.log('selected')
-            console.log(order.table.row({
-              selected: true
-            }).data())
-            order.editor.edit(order.table.row({selected: true}), false).set('dp-52', 'נשלחה').submit();
-          })
+          // shipment.editor.on('closed', function () {
+          //   // Once shipment closed, update the order automatically
+          //   var id = order.table.row({
+          //     selected: true
+          //   }).data();
+          //   console.log('selected')
+          //   console.log(order.table.row({
+          //     selected: true
+          //   }).data())
+            
+          //   order.editor.edit(order.table.row({selected: true}), false).set('l-18[].id', 'נשלחה').submit();
+          // })
         }
       </script>
             <div class="card">
