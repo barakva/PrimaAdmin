@@ -53,21 +53,21 @@
                 wpTB.table = e.table;
                 wpTB.editor = e.editor
                 e.table.select.style('single');
-                console.log('wpTB')
-                console.log(wpTB)
+                //console.log('wpTB')
+                //console.log(wpTB)
             } else if (e.table.table().node().id === dpTB.id) {
                 dpTB.table = e.table;
                 dpTB.editor = e.editor;
-                console.log('dpTB')
-                console.log(dpTB)
+                //console.log('dpTB')
+                //console.log(dpTB)
             }
 
             $('#ct-f24dbdae-a7b8-11ec-8544-1357d449d86b tbody').on('click', 'tr', function () {
-                console.log('in')
+                //console.log('in')
                 if (e.table.row(this).data() !== undefined)
                     clickedData = e.table.row(this).data()
-                console.log('clickedData1')
-                console.log(clickedData)
+                //console.log('clickedData1')
+                //console.log(clickedData)
 
             });
         })
@@ -94,7 +94,7 @@
             //console.log('sel')
             //console.log(sel)
             let select1 = $(sel[3]);
-            console.log(select1[0])
+            //console.log(select1[0])
             let select2 = $(sel[1]);
             //console.log(select2[0])
             clickedData['dp-62'] === "1" ? select1.val("4").change() : select1.val("2").change();
