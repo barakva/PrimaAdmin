@@ -63,11 +63,11 @@
             }
 
             $('#ct-f24dbdae-a7b8-11ec-8544-1357d449d86b tbody').on('click', 'tr', function () {
-                //console.log('in')
+                console.log('in')
                 if (e.table.row(this).data() !== undefined)
                     clickedData = e.table.row(this).data()
-                //console.log('clickedData1')
-                //console.log(clickedData)
+                console.log('clickedData1')
+                console.log(clickedData)
 
             });
         })
@@ -89,16 +89,22 @@
             let testi;
             let sel = $("select");
             let btn = $(".btn")[0]
-            //console.log('btn')
-            //console.log(btn)
-            //console.log('sel')
-            //console.log(sel)
-            let select1 = $(sel[3]);
-            //console.log(select1[0])
-            let select2 = $(sel[1]);
-            //console.log(select2[0])
-            clickedData['dp-62'] === "1" ? select1.val("4").change() : select1.val("2").change();
-            select1.value = "2"
+            
+            let select1 = $(sel[0]);
+            
+            children =[].slice.call(select1.children());
+            let final = clickedData['dp-64'].replace('[{\"text\":\"', '').replace('\",\"type\":\"text\"}]', '')
+            children.forEach(element => {
+               
+                if(element.innerHTML ===final){
+                    final = element._editor_val
+                }
+                
+            });
+            
+            
+            select1.val(final).change()
+
             // btn.on('click', function () {
             //     order.editor.edit(order.table.row({
             //         selected: true
