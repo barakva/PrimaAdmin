@@ -2,39 +2,147 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Components / Accordion - NiceAdmin Bootstrap Template</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
+    <title>Components / Accordion - NiceAdmin Bootstrap Template</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
 
-  <!-- Favicons -->
-  <link href="../assets/img/favicon.png" rel="icon">
-  <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <!-- Favicons -->
+    <link href="../assets/img/favicon.png" rel="icon">
+    <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.gstatic.com" rel="preconnect">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+          rel="stylesheet">
 
-  <!-- Vendor CSS Files -->
-  <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="../assets/vendor/quill/quill.snow.css" rel="stylesheet">
-  <link href="../assets/vendor/quill/quill.bubble.css" rel="stylesheet">
-  <link href="../assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="../assets/vendor/simple-datatables/style.css" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="../assets/vendor/quill/quill.snow.css" rel="stylesheet">
+    <link href="../assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+    <link href="../assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="../assets/vendor/simple-datatables/style.css" rel="stylesheet">
 
-  <!-- Template Main CSS File -->
-  <link href="../assets/css/style.css" rel="stylesheet">
+    <!-- Template Main CSS File -->
+    <link href="../assets/css/style.css" rel="stylesheet">
+    <script>
+        let clickedData;
 
-  <!-- =======================================================
-  * Template Name: NiceAdmin - v2.2.2
-  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+        var dpTB = {
+            table: null,
+            editor: null,
+            id: 'ct-8287af74-a174-11ec-8f1a-ef7c9b1f6d14',
+            selected: null
+        };
+
+        var wpTB = {
+            table: null,
+            editor: null,
+            id: 'ct-f24dbdae-a7b8-11ec-8544-1357d449d86b'
+        };
+        document.addEventListener('ct-ready', function (e) {
+
+
+
+            if (e.table.table().node().id === wpTB.id) {
+                wpTB.table = e.table;
+                wpTB.editor = e.editor
+                e.table.select.style('single');
+                //console.log('wpTB')
+                //console.log(wpTB)
+            } else if (e.table.table().node().id === dpTB.id) {
+                dpTB.table = e.table;
+                dpTB.editor = e.editor;
+                //console.log('dpTB')
+                //console.log(dpTB)
+            }
+
+            $('#ct-f24dbdae-a7b8-11ec-8544-1357d449d86b tbody').on('click', 'tr', function () {
+                console.log('in')
+                if (e.table.row(this).data() !== undefined)
+                    clickedData = e.table.row(this).data()
+                console.log('clickedData1')
+                console.log(clickedData)
+
+            });
+        })
+
+
+
+
+        function CreatePlan(e, dt, node, config) {
+            // Open the create form
+
+
+
+            dpTB.editor.create({
+                title: 'Create Plan',
+                buttons: 'Save'
+
+            })
+            //preparing form elements
+            let testi;
+            let sel = $("select");
+            let btn = $(".btn")[0]
+
+            let select1 = $(sel[0]);
+
+            children = [].slice.call(select1.children());
+            let final = clickedData['dp-64'].replace('[{\"text\":\"', '').replace('\",\"type\":\"text\"}]', '')
+            children.forEach(element => {
+
+                if (element.innerHTML === final) {
+                    final = element._editor_val
+                }
+
+            });
+
+
+            select1.val(final).change()
+
+            // btn.on('click', function () {
+            //     order.editor.edit(order.table.row({
+            //         selected: true
+            //     }), false).set('l-18[].id', 'נשלחה').submit();
+            // })
+
+            // select2[0].forEach(element => {
+            //     if (element.innerHTML === clickedData['l-14'][0]['dp-25'].replace('[{\"text\":\"', '').replace(
+            //             '\",\"type\":\"text\"}]', ''))
+            //         testi = element.value;
+            // });
+
+            // //set the row values to the form elements
+
+            // select2.val(testi);
+
+
+            // console.log('shipment')
+            // console.log(shipment)
+            // shipment.editor.on('closed', function () {
+            //   // Once shipment closed, update the order automatically
+            //   var id = order.table.row({
+            //     selected: true
+            //   }).data();
+            //   console.log('selected')
+            //   console.log(order.table.row({
+            //     selected: true
+            //   }).data())
+
+            //   order.editor.edit(order.table.row({selected: true}), false).set('l-18[].id', 'נשלחה').submit();
+            // })
+        }
+    </script>
+    <!-- =======================================================
+    * Template Name: NiceAdmin - v2.2.2
+    * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+    * Author: BootstrapMade.com
+    * License: https://bootstrapmade.com/license/
+    ======================================================== -->
 </head>
 
 <body>
@@ -51,7 +159,6 @@
         </div><!-- End Logo -->
 
     </header><!-- End Header -->
-
     <!-- ======= Sidebar ======= -->
     <aside id="sidebar" class="sidebar">
 
@@ -145,8 +252,12 @@
             <div class="card">
                 <div class="card-body">
                     <script src="https://prima.cloudtables.io/loader/f24dbdae-a7b8-11ec-8544-1357d449d86b/table/d"
-                            data-apiKey="uVp2dpI8ORbJW0ZaOfgNV0o0"
-                            data-clientId="{Unique client id}">
+                            data-apiKey="uVp2dpI8ORbJW0ZaOfgNV0o0" data-clientId="{Unique client id}">
+                    </script>
+                </div>
+                <div class="card-body" style="display: none;">
+                    <script src="https://prima.cloudtables.io/loader/8287af74-a174-11ec-8f1a-ef7c9b1f6d14/table/d"
+                            data-apiKey="uVp2dpI8ORbJW0ZaOfgNV0o0" data-clientId="{Unique client id}">
                     </script>
                 </div>
             </div>
@@ -156,7 +267,9 @@
     </main><!-- End #main -->
 
 
-    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center">
+        <i class="bi bi-arrow-up-short"></i>
+    </a>
 
     <!-- Vendor JS Files -->
     <script src="../assets/vendor/apexcharts/apexcharts.min.js"></script>
