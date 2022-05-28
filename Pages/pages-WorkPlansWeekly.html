@@ -36,7 +36,7 @@
         var dpTB = {
             table: null,
             editor: null,
-            id: 'ct-8287af74-a174-11ec-8f1a-ef7c9b1f6d14',
+            id: 'ct-eb3c5700-de8b-11ec-9629-8f0e4b8c625d',
             selected: null
         };
 
@@ -89,22 +89,31 @@
             let testi;
             let sel = $("select");
             let btn = $(".btn")[0]
-            
-            let select1 = $(sel[0]);
-            
-            children =[].slice.call(select1.children());
+
+            select1 = $(sel[0]);
+            select2 = $(sel[1]);
+            children = [].slice.call(select1.children());
+            children2 = [].slice.call(select2.children());
             let final = clickedData['dp-64'].replace('[{\"text\":\"', '').replace('\",\"type\":\"text\"}]', '')
+            let final2 = clickedData['l-26'][0]["dp-50"].replace('[{\"text\":\"', '').replace('\",\"type\":\"text\"}]','')
+            console.log(final2)
             children.forEach(element => {
-               
-                if(element.innerHTML ===final){
+
+                if (element.innerHTML === final) {
                     final = element._editor_val
                 }
-                
-            });
-            
-            
-            select1.val(final).change()
 
+            });
+            children2.forEach(element => {
+
+                if (element.innerHTML === final2) {
+                    final2 = element._editor_val
+                }
+
+            });
+
+            select1.val(final).change()
+            select2.val(final2).change()
             // btn.on('click', function () {
             //     order.editor.edit(order.table.row({
             //         selected: true
@@ -257,10 +266,14 @@
                         data-apiKey="uVp2dpI8ORbJW0ZaOfgNV0o0" data-clientId="{Unique client id}">
                     </script>
                 </div>
-                <div class="card-body" style="display: none;">
+                <!-- <div class="card-body" style="display: none;">
                     <script src="https://prima.cloudtables.io/loader/8287af74-a174-11ec-8f1a-ef7c9b1f6d14/table/d"
                         data-apiKey="uVp2dpI8ORbJW0ZaOfgNV0o0" data-clientId="{Unique client id}">
                     </script>
+                </div> -->
+                <div class="card-body" style="display: none;">
+                    <script src="https://prima.cloudtables.io/loader/eb3c5700-de8b-11ec-9629-8f0e4b8c625d/table/d"
+                        data-apiKey="uVp2dpI8ORbJW0ZaOfgNV0o0" data-clientId="{Unique client id}"></script>
                 </div>
             </div>
 

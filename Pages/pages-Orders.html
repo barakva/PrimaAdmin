@@ -120,7 +120,7 @@
           </li>
         </ul>
       </li><!-- End Workplan Nav -->
-
+      
       <li class="nav-item">
         <a class="nav-link collapsed" href="pages-Resources.html">
           <i class="bi bi-box-arrow-in-right"></i>
@@ -150,18 +150,12 @@
       <div class="row">
 
       </div>
-
-      <div class="card">
-        <div class="card-body">
-          <script src="https://prima.cloudtables.io/loader/443b781a-a172-11ec-8f1a-9b776e234b62/table/d"
-            data-apiKey="uVp2dpI8ORbJW0ZaOfgNV0o0" data-clientId="{Unique client id}">
-          </script>
-        </div>
-      </div>
-      <!-- Button trigger modal -->
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+      <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
         Launch demo modal
-      </button>
+      </button> -->
+      
+      <!-- Button trigger modal -->
+      
 
       <!-- Modal -->
       <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
@@ -224,18 +218,22 @@
           });
 
           $('#readUrl').on('change', function (event) {
+            console.log($('#readUrl')[0].files[0])
             const uploadedFile = event.target.files[0]
             console.log('file')
             console.log(uploadedFile)
             const formData = new FormData()
-            formData.append('data', uploadedFile, 'test.png');
-            
+            formData.append('data', $('#readUrl')[0].files[0], 'test.png');
+
             let data = {};
             data.file = this.value;
             let response;
             fetch('http://localhost.local:3000/upload', {
                 method: 'POST', // *GET, POST, PUT, DELETE, etc.
-                body: formData // body data type must match "Content-Type" header
+                headers: {
+                  'cors':"no-cors"
+                                },
+                body: formData
               })
               .then(response => response.json())
 
@@ -260,27 +258,32 @@
           //preparing form elements
           let testi;
           let sel = $("select");
-          let btn = $(".btn")
-          console.log(btn[12])
-          btn = $(btn[12])
+          let inp = $("input");
+          let btn = $(".btn");
+          console.log(btn[12]);
+          btn = $(btn[12]);
           let select1 = $(sel[0]);
           let select2 = $(sel[1]);
+           input1 =$(inp[20])[0];
+           console.log($(inp[20]));
+          console.log(input1);
           btn.on('click', function () {
             order.editor.edit(order.table.row({
               selected: true
-            }), false).set('l-18[].id', 'נשלחה').submit();
+            }), false).set('l-18[].id', [5]).submit();
           })
-
+          
           select2[0].forEach(element => {
-            if (element.innerHTML === clickedData['l-14'][0]['dp-25'].replace('[{\"text\":\"', '').replace(
+            if (element.innerHTML === clickedData['l-34'][0]['dp-77'].replace('[{\"text\":\"', '').replace(
                 '\",\"type\":\"text\"}]', ''))
               testi = element.value;
           });
 
           //set the row values to the form elements
+          
           select1.val(clickedData['dp-19']).change();
           select2.val(testi);
-
+          input1.value = clickedData['dp-38']
 
           console.log('shipment')
           console.log(shipment)
@@ -306,7 +309,13 @@
           </div>
         </div>
       </div>
-
+      <div class="card">
+        <div class="card-body">
+          <script src="https://prima.cloudtables.io/loader/443b781a-a172-11ec-8f1a-9b776e234b62/table/d"
+            data-apiKey="uVp2dpI8ORbJW0ZaOfgNV0o0" data-clientId="{Unique client id}">
+          </script>
+        </div>
+      </div>
 
     </section>
 

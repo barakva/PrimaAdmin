@@ -68,8 +68,7 @@
               let ctx2 = document.getElementById("barChart").getContext("2d");
               let ctx3 = document.getElementById("barChart2").getContext("2d");
               let ctx4 = document.getElementById("pieChart").getContext("2d");
-              let ctx5 = document.getElementById("pieChart2").getContext("2d");
-              let ctx6 = document.getElementById("pieChart3").getContext("2d");
+              
               
               document.addEventListener('ct-ready', function (e) {
                 tables.push(e.table);
@@ -359,22 +358,22 @@
                         }
                       });
                       
-                       new Chart(ctx5, {
-                        type: 'pie',
-                        data: {
-                          labels: ['תקין', 'עיכוב קל', 'עיכוב חמור'],
-                          datasets: [{
-                            label: 'Orders By Company',
-                            data: ordersPerDay,
-                            backgroundColor: [
-                              'rgb(255, 99, 132)',
-                              'rgb(54, 162, 235)',
-                              'rgb(255, 205, 86)'
-                            ],
-                            hoverOffset: 2
-                          }]
-                        }
-                      });
+                      //  new Chart(ctx5, {
+                      //   type: 'pie',
+                      //   data: {
+                      //     labels: ['תקין', 'עיכוב קל', 'עיכוב חמור'],
+                      //     datasets: [{
+                      //       label: 'Orders By Company',
+                      //       data: ordersPerDay,
+                      //       backgroundColor: [
+                      //         'rgb(255, 99, 132)',
+                      //         'rgb(54, 162, 235)',
+                      //         'rgb(255, 205, 86)'
+                      //       ],
+                      //       hoverOffset: 2
+                      //     }]
+                      //   }
+                      // });
                       
                     }
                     if(element.table().node().id==='ct-0b4cd654-a175-11ec-8f1a-3fd907b353fa'){
@@ -396,22 +395,22 @@
                         }
                       });
                       console.log(numOfOrders)
-                       new Chart(ctx6, {
-                        type: 'pie',
-                        data: {
-                          labels: ['בעיית צבע', 'טעות במידה', 'שבר','אחר'],
-                          datasets: [{
-                            label: 'Orders By Company',
-                            data: problemsArr,
-                            backgroundColor: [
-                              'rgb(255, 99, 132)',
-                              'rgb(54, 162, 235)',
-                              'rgb(255, 205, 86)'
-                            ],
-                            hoverOffset: 2
-                          }]
-                        }
-                      });
+                      //  new Chart(ctx6, {
+                      //   type: 'pie',
+                      //   data: {
+                      //     labels: ['בעיית צבע', 'טעות במידה', 'שבר','אחר'],
+                      //     datasets: [{
+                      //       label: 'Orders By Company',
+                      //       data: problemsArr,
+                      //       backgroundColor: [
+                      //         'rgb(255, 99, 132)',
+                      //         'rgb(54, 162, 235)',
+                      //         'rgb(255, 205, 86)'
+                      //       ],
+                      //       hoverOffset: 2
+                      //     }]
+                      //   }
+                      // });
                     }
                   })
                 });
@@ -611,32 +610,8 @@
                               </div>
                             </div>
                           </div>
-                          <div class="col-6">
-                            <div class="card">
-                              <div class="card-body">
-                                <h5 class="card-title">Orders Status</h5>
-              
-                                <!-- Pie Chart -->
-                                <canvas id="pieChart2" style="max-height: 374px;"></canvas>
-              
-                                <!-- End Pie CHart -->
-              
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col-lg-6">
-                            <div class="card">
-                              <div class="card-body">
-                                <h5 class="card-title">Faluty Orders</h5>
-              
-                                <!-- Pie Chart -->
-                                <canvas id="pieChart3" style="max-height: 374px;"></canvas>
-              
-                                <!-- End Pie CHart -->
-              
-                              </div>
-                            </div>
-                          </div>
+                          
+                          
                           <div class="col-lg-12">
                             <div class="card">
                               <div class="card-body">

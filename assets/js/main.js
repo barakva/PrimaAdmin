@@ -1,4 +1,4 @@
-const { callback } = require("../vendor/chart.js/helpers.esm");
+//const { callback } = require("../vendor/chart.js/helpers.esm");
 
 /**
 * Template Name: NiceAdmin - v2.2.2
