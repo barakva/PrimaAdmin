@@ -481,11 +481,22 @@
             </li><!-- End Workplan Nav -->
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="pages-Resources.html">
-                    <i class="bi bi-box-arrow-in-right"></i>
-                    <span>Resources</span>
+                <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-gem"></i><span>Items</span><i class="bi bi-chevron-down ms-auto"></i>
                 </a>
-            </li><!-- End Resources Page Nav -->
+                <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a href="pages-Products.html">
+                            <i class="bi bi-circle"></i><span>Products</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="pages-Resources.html">
+                            <i class="bi bi-circle"></i><span>Resources</span>
+                        </a>
+                    </li>
+                </ul>
+            </li><!-- End Items Nav -->
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="pages-QA.html">
@@ -611,19 +622,21 @@
                               </div>
                             </div>
                           </div>
+
                           <div class="col-6">
                             <div class="card">
                               <div class="card-body">
                                 <h5 class="card-title">Orders Status</h5>
               
-                                <!-- Pie Chart -->
+                                 <!--Pie Chart--> 
                                 <canvas id="pieChart2" style="max-height: 374px;"></canvas>
               
-                                <!-- End Pie CHart -->
+                                 End Pie CHart 
               
                               </div>
                             </div>
                           </div>
+
                           <div class="col-lg-6">
                             <div class="card">
                               <div class="card-body">

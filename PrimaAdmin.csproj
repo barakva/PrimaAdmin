@@ -444,6 +444,7 @@
     <Content Include="Pages\empages-Shipments.html" />
     <Content Include="Pages\empages-Resources.html" />
     <Content Include="Pages\empages-QA.html" />
+    <Content Include="Pages\pages-Products.html" />
     <Content Include="Pages\pages-SubProjects.html" />
     <Content Include="Pages\pages-Orders.html" />
     <Content Include="Pages\pages-Shipments.html" />
