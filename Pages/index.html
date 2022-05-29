@@ -67,7 +67,7 @@
       
               let ctx2 = document.getElementById("barChart").getContext("2d");
               let ctx3 = document.getElementById("barChart2").getContext("2d");
-              let ctx4 = document.getElementById("pieChart").getContext("2d");
+              let ctx6 = document.getElementById("pieChart").getContext("2d");
               
               
               document.addEventListener('ct-ready', function (e) {
@@ -341,22 +341,22 @@
                       console.log(valuesData)
       
                       
-                       new Chart(ctx4, {
-                        type: 'pie',
-                        data: {
-                          labels: labelData,
-                          datasets: [{
-                            label: 'Orders By Company',
-                            data: valuesData,
-                            backgroundColor: [
-                              'rgb(255, 99, 132)',
-                              'rgb(54, 162, 235)',
-                              'rgb(255, 205, 86)'
-                            ],
-                            hoverOffset: 2
-                          }]
-                        }
-                      });
+                      //  new Chart(ctx4, {
+                      //   type: 'pie',
+                      //   data: {
+                      //     labels: labelData,
+                      //     datasets: [{
+                      //       label: 'Orders By Company',
+                      //       data: valuesData,
+                      //       backgroundColor: [
+                      //         'rgb(255, 99, 132)',
+                      //         'rgb(54, 162, 235)',
+                      //         'rgb(255, 205, 86)'
+                      //       ],
+                      //       hoverOffset: 2
+                      //     }]
+                      //   }
+                      // });
                       
                       //  new Chart(ctx5, {
                       //   type: 'pie',
@@ -394,23 +394,26 @@
                           problemsArr[3]++
                         }
                       });
+                      console.log('problemsArr')
+                      console.log(problemsArr)
                       console.log(numOfOrders)
-                      //  new Chart(ctx6, {
-                      //   type: 'pie',
-                      //   data: {
-                      //     labels: ['בעיית צבע', 'טעות במידה', 'שבר','אחר'],
-                      //     datasets: [{
-                      //       label: 'Orders By Company',
-                      //       data: problemsArr,
-                      //       backgroundColor: [
-                      //         'rgb(255, 99, 132)',
-                      //         'rgb(54, 162, 235)',
-                      //         'rgb(255, 205, 86)'
-                      //       ],
-                      //       hoverOffset: 2
-                      //     }]
-                      //   }
-                      // });
+                       new Chart(ctx6, {
+                        type: 'pie',
+                        data: {
+                          labels: ['בעיית צבע', 'טעות במידה', 'שבר','אחר'],
+                          datasets: [{
+                            label: 'Orders By Company',
+                            data: problemsArr,
+                            backgroundColor: [
+                              'rgb(255, 99, 132)',
+                              'rgb(54, 162, 235)',
+                              'rgb(255, 205, 86)',
+                              'rgb(59, 205, 86)'
+                            ],
+                            hoverOffset: 2
+                          }]
+                        }
+                      });
                     }
                   })
                 });
