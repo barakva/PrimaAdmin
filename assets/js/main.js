@@ -319,3 +319,47 @@
   }
 
 })();
+
+
+
+//Uploading files script
+
+
+/**
+ * TODO(developer): Uncomment the following lines before running the sample.
+ */
+// The ID of your GCS bucket
+const bucketName = 'prima_solutions_bucket';
+
+// The path to your file to upload
+ var filePath = 'path/to/your/file';
+
+// The new ID for your GCS file
+ const destFileName = 'your-new-file-name';
+
+// Imports the Google Cloud client library
+const { Storage } = require('@google-cloud/storage');
+
+function getUploadFileLocation(x) {
+    console.log('here1');
+    console.log(x);
+    filePath = x;
+    console.log('file path:');
+    console.log(filePath);
+    uploadFile();
+};
+
+
+// Creates a client
+const storage = new Storage();
+
+async function uploadFile() {
+    console.log('uploadFile function');
+    await storage.bucket(bucketName).upload(filePath, {
+        destination: destFileName,
+    });
+
+    console.log(`${filePath} uploaded to ${bucketName}`);
+}
+
+uploadFile().catch(console.error);

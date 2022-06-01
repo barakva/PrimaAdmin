@@ -5,6 +5,11 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
+    <!-- Image Upload -->
+    <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css" />-->
+    <script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js" charset="utf-8"></script>
+    <script>UPLOADCARE_PUBLIC_KEY = "b187cf97ee56fe9e1efd";</script>
+
     <title>Prima Solutions</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
@@ -147,6 +152,10 @@
         <div class="pagetitle">
             <h1>Orders</h1>
         </div><!-- End Page Title -->
+
+        <div>
+            <input type="hidden" role="uploadcare-uploader" name="uploadcare_image" />
+        </div>
 
         <section class="section">
             <div class="row">
@@ -325,12 +334,9 @@
         </section>
 
     </main><!-- End #main -->
-
-
     <!--<a href="#" class="back-to-top d-flex align-items-center justify-content-center">
         <i class="bi bi-arrow-up-short"></i>
     </a>-->
-
     <!-- Vendor JS Files -->
     <script src="../assets/vendor/apexcharts/apexcharts.min.js"></script>
     <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -343,6 +349,14 @@
 
     <!-- Template Main JS File -->
     <script src="../assets/js/main.js"></script>
+
+    <!-- Image Upload -->
+    <script>
+        const widget = uploadcare.Widget("[role=uploadcare-uploader]");
+        widget.onUploadComplete(function (fileInfo) {
+            console.log(fileInfo.cdnUrl);
+        });
+    </script>
 
 </body>
 

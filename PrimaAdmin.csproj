@@ -457,6 +457,8 @@
     <Content Include="Pages\pages-loginXXX.html" />
     <Content Include="Pages\tables-data.html" />
     <Content Include="Pages\tables-general.html" />
+    <Content Include="Pages\TestUpload - Copy.html" />
+    <Content Include="Pages\TestUpload.html" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\HelpPage\Views\Web.config" />

@@ -1,0 +1,86 @@
+﻿<html>
+
+<head>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.min.js"></script>
+    <script src="https://ucarecdn.com/libs/widget-tab-effects/1.x/uploadcare.tab-effects.min.js"></script>
+
+
+    <script>
+
+        window.UPLOADCARE_PUBLIC_KEY = 'demopublickey'
+        uploadcare.registerTab('preview', uploadcareTabEffects)
+
+        const widget = uploadcare.Widget('[role=uploadcare-uploader]')
+        let images = []
+
+        widget.onUploadComplete(function (info) {
+            saveImage(info.cdnUrl).then(() => {
+                $('#uploadedImage').parent().html('<a href="javascript:refreshPage()">Refresh it!</a>')
+            })
+        })
+
+        fetchImages().then(uploadedImages => {
+            images = uploadedImages
+
+            const imageHtml = images.reduce((html, url) => {
+                const fullUrl = `${url}/-/preview/-/scale_crop/200x200/`
+
+                return (
+                    html +
+                    '<div class="col" >' +
+                    '<a href="#" class="d-block mb-4 h-100">' +
+                    `<img class="img-fluid img-thumbnail" src="${fullUrl}">` +
+                    '</a>' +
+                    '</div>'
+                )
+            }, '')
+
+            $(imageHtml).appendTo('#imagesContainer')
+        })
+
+        function fetchImages() {
+            return new Promise(resolve => {
+                const images = JSON.parse(localStorage.getItem('images') || '[]')
+
+                setTimeout(() => resolve(images), 500)
+            })
+        }
+
+        function saveImage(url) {
+            return new Promise(resolve => {
+                images.push(url)
+                localStorage.setItem('images', JSON.stringify(images))
+                setTimeout(() => resolve(), 500)
+            })
+        }
+
+        function refreshPage() {
+            window.location.href = window.location.href
+        }
+
+    </script>
+
+</head>
+
+<body>
+
+    <div class="container mt-4">
+        <div class="float-right mb-4 mt-2">
+            <input type="hidden" role="uploadcare-uploader" id="uploadedImage"
+                   data-preview-step="true"
+                   data-effects="crop,rotate,enhance,sharp,grayscale" />
+        </div>
+
+        <h2 class="mb-4">Simple Image Hosting</h2>
+
+        <div class="row" id="imagesContainer"></div>
+    </div>
+
+
+</body>
+
+
+</html>
