@@ -95,7 +95,7 @@
             children = [].slice.call(select1.children());
             children2 = [].slice.call(select2.children());
             let final = clickedData['dp-64'].replace('[{\"text\":\"', '').replace('\",\"type\":\"text\"}]', '')
-            let final2 = clickedData['l-26'][0]["dp-50"].replace('[{\"text\":\"', '').replace('\",\"type\":\"text\"}]','')
+            let final2 = clickedData["dp-64"].replace('[{\"text\":\"', '').replace('\",\"type\":\"text\"}]','')
             console.log(final2)
             children.forEach(element => {
 
@@ -114,17 +114,17 @@
 
             select1.val(final).change()
             select2.val(final2).change()
-            // btn.on('click', function () {
-            //     order.editor.edit(order.table.row({
-            //         selected: true
-            //     }), false).set('l-18[].id', 'נשלחה').submit();
-            // })
+            btn.on('click', function () {
+                order.editor.edit(order.table.row({
+                    selected: true
+                }), false).set('l-18[].id', 'נשלחה').submit();
+            })
 
-            // select2[0].forEach(element => {
-            //     if (element.innerHTML === clickedData['l-14'][0]['dp-25'].replace('[{\"text\":\"', '').replace(
-            //             '\",\"type\":\"text\"}]', ''))
-            //         testi = element.value;
-            // });
+            select2[0].forEach(element => {
+                if (element.innerHTML === clickedData['l-14'][0]['dp-25'].replace('[{\"text\":\"', '').replace(
+                        '\",\"type\":\"text\"}]', ''))
+                    testi = element.value;
+            });
 
             // //set the row values to the form elements
 
