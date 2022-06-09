@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Components / Accordion - NiceAdmin Bootstrap Template</title>
+    <title>Prima Solutions</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -94,7 +94,7 @@
             children = [].slice.call(select1.children());
             children2 = [].slice.call(select2.children());
             let final = clickedData['dp-64'].replace('[{\"text\":\"', '').replace('\",\"type\":\"text\"}]', '')
-            let final2 = clickedData['l-26'][0]["dp-50"].replace('[{\"text\":\"', '').replace('\",\"type\":\"text\"}]', '')
+            let final2 = clickedData["dp-64"].replace('[{\"text\":\"', '').replace('\",\"type\":\"text\"}]', '')
             console.log(final2)
             children.forEach(element => {
 
@@ -113,17 +113,17 @@
 
             select1.val(final).change()
             select2.val(final2).change()
-            // btn.on('click', function () {
-            //     order.editor.edit(order.table.row({
-            //         selected: true
-            //     }), false).set('l-18[].id', 'נשלחה').submit();
-            // })
+            btn.on('click', function () {
+                order.editor.edit(order.table.row({
+                    selected: true
+                }), false).set('l-18[].id', 'נשלחה').submit();
+            })
 
-            // select2[0].forEach(element => {
-            //     if (element.innerHTML === clickedData['l-14'][0]['dp-25'].replace('[{\"text\":\"', '').replace(
-            //             '\",\"type\":\"text\"}]', ''))
-            //         testi = element.value;
-            // });
+            select2[0].forEach(element => {
+                if (element.innerHTML === clickedData['l-14'][0]['dp-25'].replace('[{\"text\":\"', '').replace(
+                    '\",\"type\":\"text\"}]', ''))
+                    testi = element.value;
+            });
 
             // //set the row values to the form elements
 
@@ -217,7 +217,7 @@
                 <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
                         <a href="pages-WorkPlansWeekly.html" class="active">
-                            <i class="bi bi-circle"></i><span>Weekly Work Plans</span>
+                            <i class="bi bi-circle"></i><span>Order Fulfillment Plan</span>
                         </a>
                     </li>
                     <li>
@@ -261,7 +261,7 @@
     <main id="main" class="main">
 
         <div class="pagetitle">
-            <h1>Weekly Work Plans</h1>
+            <h1>Order Fulfillment Plans</h1>
         </div><!-- End Page Title -->
 
         <section class="section">

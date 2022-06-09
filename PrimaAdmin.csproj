@@ -440,6 +440,7 @@
     <Content Include="Pages\pages-Customers.html" />
     <Content Include="Pages\pages-login.html" />
     <Content Include="Pages\empages-Orders.html" />
+    <Content Include="Pages\pages-Orders - Copy.html" />
     <Content Include="Pages\pages-Products.html" />
     <Content Include="Pages\pages-Projects.html" />
     <Content Include="Pages\empages-Shipments.html" />
