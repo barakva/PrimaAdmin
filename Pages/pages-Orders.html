@@ -301,7 +301,8 @@
             //   selected: true
             // }).data())
             console.log('sum :')
-            if (parseInt(clickedData['dp-94']) === "") {
+            
+            if (clickedData['dp-94'].length===0) {
               console.log("isnull")
               var sum = parseInt(document.querySelectorAll('#DTE_Field_dp-72')[0].value);
             } else {
@@ -312,13 +313,13 @@
 
             console.log(sum)
             console.log(order.editor)
-
             await order.editor.edit(order.table.row({
               selected: true
-            }), false).set('dp-94', sum.toString()).submit()
-            await order.editor.edit(order.table.row({
-              selected: true
-            }), false).set('dp-95', date).submit()
+            }), false).set('dp-95', date).set('dp-94', sum.toString()).submit()
+            // await order.editor.edit(order.table.row({
+            //   selected: true
+            // }), false).set('dp-94', sum.toString()).submit()
+            
              
             // const [firstCall, secondCall] = await Promise.all([
             //  order.editor.edit(order.table.row({
