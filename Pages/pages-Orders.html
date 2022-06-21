@@ -120,7 +120,7 @@
           </li>
         </ul>
       </li><!-- End Workplan Nav -->
-      
+
       <li class="nav-item">
         <a class="nav-link collapsed" href="pages-Resources.html">
           <i class="bi bi-box-arrow-in-right"></i>
@@ -150,12 +150,12 @@
       <div class="row">
 
       </div>
-       <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+      <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
         Launch demo modal
       </button>  -->
-      
+
       <!-- Button trigger modal -->
-      
+
 
       <!-- Modal -->
       <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
@@ -198,7 +198,8 @@
         document.addEventListener('ct-ready', function (e) {
           tables.push(e.table);
           editors.push(e.editor);
-
+          console.log("table")
+          console.log(e.table)
           if (e.table.table().node().id === order.id) {
             order.table = e.table;
             order.editor = e.editor;
@@ -231,8 +232,8 @@
             fetch('http://localhost.local:3000/upload', {
                 method: 'POST', // *GET, POST, PUT, DELETE, etc.
                 headers: {
-                  'cors':"no-cors"
-                                },
+                  'cors': "no-cors"
+                },
                 body: formData
               })
               .then(response => response.json())
@@ -264,41 +265,71 @@
           btn = $(btn[12]);
           let select1 = $(sel[0]);
           let select2 = $(sel[1]);
-           input1 =$(inp[20])[0];
-           console.log($(inp[20]));
+          input1 = $(inp[20])[0];
+          console.log($(inp[20]));
           console.log(input1);
-          btn.on('click', function () {
-            order.editor.edit(order.table.row({
+          btn.on('click', async function () {
+            await order.editor.edit(order.table.row({
               selected: true
-            }), false).set('l-18[].id', [5]).submit();
+            }), false).set('l-18[].id', [7]).submit();
           })
-          
-          select2[0].forEach(element => {
-            if (element.innerHTML === clickedData['l-34'][0]['dp-77'].replace('[{\"text\":\"', '').replace(
-                '\",\"type\":\"text\"}]', ''))
-              testi = element.value;
-          });
+
+          // select2[0].forEach(element => {
+          //   if (element.innerHTML === clickedData['l-34'][0]['dp-77'].replace('[{\"text\":\"', '').replace(
+          //       '\",\"type\":\"text\"}]', ''))
+          //     testi = element.value;
+          // });
 
           //set the row values to the form elements
-          
+
           select1.val(clickedData['dp-19']).change();
           select2.val(testi);
           input1.value = clickedData['dp-38']
 
           console.log('shipment')
           console.log(shipment)
-          // shipment.editor.on('closed', function () {
-          //   // Once shipment closed, update the order automatically
-          //   var id = order.table.row({
-          //     selected: true
-          //   }).data();
-          //   console.log('selected')
-          //   console.log(order.table.row({
-          //     selected: true
-          //   }).data())
 
-          //   order.editor.edit(order.table.row({selected: true}), false).set('l-18[].id', 'נשלחה').submit();
-          // })
+          let date = new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate()
+          console.log(date)
+          shipment.editor.on('closed', async function () {
+            // Once shipment closed, update the order automatically
+            // var id = order.table.row({
+            //   selected: true
+            // }).data();
+            // console.log('selected')
+            // console.log(order.table.row({
+            //   selected: true
+            // }).data())
+            console.log('sum :')
+            if (parseInt(clickedData['dp-94']) === "") {
+              console.log("isnull")
+              var sum = parseInt(document.querySelectorAll('#DTE_Field_dp-72')[0].value);
+            } else {
+              console.log("notnull")
+              var sum = (parseInt(clickedData['dp-94']) + parseInt(document.querySelectorAll('#DTE_Field_dp-72')[
+                0].value));
+            }
+
+            console.log(sum)
+            console.log(order.editor)
+
+            await order.editor.edit(order.table.row({
+              selected: true
+            }), false).set('dp-94', sum.toString()).submit()
+            await order.editor.edit(order.table.row({
+              selected: true
+            }), false).set('dp-95', date).submit()
+             
+            // const [firstCall, secondCall] = await Promise.all([
+            //  order.editor.edit(order.table.row({
+            //   selected: true
+            // }), false).set('dp-94', sum.toString()).submit(),
+            // order.editor.edit(order.table.row({
+            //   selected: true
+            // }), false).set('dp-95', date).submit()
+              
+            // ])
+          })
         }
       </script>
       <div class="card">
