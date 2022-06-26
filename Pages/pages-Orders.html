@@ -268,11 +268,11 @@
           input1 = $(inp[20])[0];
           console.log($(inp[20]));
           console.log(input1);
-          btn.on('click', async function () {
-            await order.editor.edit(order.table.row({
-              selected: true
-            }), false).set('l-18[].id', [7]).submit();
-          })
+          // btn.on('click', async function () {
+          //   await order.editor.edit(order.table.row({
+          //     selected: true
+          //   }), false).set('l-18[].id', [7]).submit();
+          // })
 
           // select2[0].forEach(element => {
           //   if (element.innerHTML === clickedData['l-34'][0]['dp-77'].replace('[{\"text\":\"', '').replace(
@@ -315,7 +315,9 @@
             console.log(order.editor)
             await order.editor.edit(order.table.row({
               selected: true
-            }), false).set('dp-95', date).set('dp-94', sum.toString()).submit()
+            }), false).set('dp-95', date).set('dp-94', sum.toString()).set('l-18[].id', [7]).submit()
+
+            
             // await order.editor.edit(order.table.row({
             //   selected: true
             // }), false).set('dp-94', sum.toString()).submit()
